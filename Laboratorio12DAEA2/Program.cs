@@ -1,4 +1,10 @@
+using Laboratorio12DAEA2.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("DemoContext") ?? throw new InvalidOperationException("Connection string 'DemoContext' not found.");
+
+builder.Services.AddDbContext<DemoContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
